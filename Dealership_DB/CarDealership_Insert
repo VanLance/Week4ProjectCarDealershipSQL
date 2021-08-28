@@ -1,0 +1,162 @@
+SELECT * 
+FROM "Customer"
+
+
+INSERT INTO "Finance"(
+	finance_id,
+	staff_id,
+	customer_id,
+	credit_score,
+	loan_amount,
+	bank_name,
+	routing_number
+)VALUES(
+	1,
+	1,
+	1,
+	750,
+	25000.50,
+	'bank rolls',
+	55555
+);
+INSERT INTO "Finance"(
+	finance_id,
+	staff_id,
+	customer_id,
+	credit_score,
+	loan_amount,
+	bank_name,
+	routing_number
+)VALUES(
+	2,
+	1,
+	1,
+	350,
+	5000.50,
+	'no rolls',
+	450
+);
+INSERT INTO "Part" (
+	part_id,
+	part_desc,
+	part_cost
+)VALUES(
+	1,
+	'air filter',
+	10
+);
+INSERT INTO "Part" (
+	part_id,
+	part_desc,
+	part_cost
+)VALUES(
+	2,
+	'belt',
+	15
+);
+INSERT INTO "Shop"(
+	repair_id,
+	staff_id,
+	labor_cost,
+	hours,
+	car_id,
+	customer_id
+)VALUES(
+	5,
+	1,
+	2000,
+	10,
+	1,
+	1
+)
+INSERT INTO "Shop"(
+	repair_id,
+	staff_id,
+	labor_cost,
+	hours,
+	car_id,
+	customer_id
+)VALUES(
+	4,
+	2,
+	3000,
+	8,
+	2,
+	2
+);
+INSERT INTO "Service"(
+	service_id,
+	repair_description,
+	service_date,
+	customer_id,
+	staff_id,
+	car_id,
+	part_id,
+	repair_id
+) VALUES (
+	1,
+	'a little work for alot of money',
+	'20201210 06:10:10',
+	1,
+	1,
+	1,
+	2,
+	4
+);
+INSERT INTO "Service"(
+	service_id,
+	repair_description,
+	service_date,
+	customer_id,
+	staff_id,
+	car_id,
+	part_id,
+	repair_id
+) VALUES (
+	2,
+	'a very little work for too much money',
+	'20201210 06:14:14',
+	1,
+	1,
+	1,
+	2,
+	5
+);
+
+INSERT INTO "Sale"(
+	sale_id,
+	sale_date,
+	msrp,
+	customer_id,
+	staff_id,
+	car_id
+)VALUES(
+	1,
+	'20201210 06:14:14',
+	5,
+)
+
+INSERT INTO "Inventory"(
+	inventory_id,
+	car_id,
+	location,
+	part_id
+)VALUES(
+	1,
+	1,
+	'warehouse',
+	1
+)
+INSERT INTO "Inventory"(
+	inventory_id,
+	car_id,
+	location,
+	part_id
+)VALUES(
+	2,
+	2,
+	'warehouse',
+	2
+)
+
+

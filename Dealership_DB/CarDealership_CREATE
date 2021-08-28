@@ -1,0 +1,133 @@
+CREATE TABLE "Customer" (
+  "customer_id" SERIAL,
+  "first_name" VARCHAR,
+  "last_name" VARCHAR,
+  "phone_number" VARCHAR,
+  "email_address" VARCHAR,
+  PRIMARY KEY ("customer_id")
+);
+
+CREATE TABLE "Car" (
+  "car_id" SERIAL,
+  "liscense_number" VARCHAR,
+  "VIN" VARCHAR,
+  "year" INTEGER,
+  "make" VARCHAR,
+  "model" VARCHAR,
+  "color" VARCHAR,
+  PRIMARY KEY ("car_id")
+);
+
+CREATE TABLE "Stafff" (
+  "staff_id" SERIAL,
+  "position" VARCHAR,
+  "first_name" VARCHAR,
+  "last_name" VARCHAR,
+  "address" VARCHAR,
+  "email" VARCHAR,
+  PRIMARY KEY ("staff_id")
+);
+
+CREATE TABLE "Shop" (
+  "repair_id" SERIAL,
+  "staff_id" INTEGER,
+  "labor_cost" NUMERIC(7,2),
+  "hours" INTEGER,
+  "car_id" INTEGER,
+  "customer_id" INTEGER,
+  PRIMARY KEY ("repair_id"),
+	FOREIGN KEY ("staff_id") REFERENCES "Stafff"("staff_id"),
+	FOREIGN KEY ("car_id") REFERENCES "Car"("car_id")
+);
+
+
+CREATE TABLE "Part" (
+  "part_id" SERIAL,
+  "part_desc" VARCHAR,
+  "part_cost" NUMERIC(7,2),
+  PRIMARY KEY ("part_id")
+
+);
+CREATE TABLE "Service" (
+	"service_id" SERIAL,
+	"repair_description" VARCHAR,
+	"service_date" TIMESTAMP,
+	"customer_id" INTEGER,
+	"staff_id" INTEGER,
+	"car_id" INTEGER,
+	"part_id" INTEGER,
+	"repair_id" INTEGER,
+	PRIMARY KEY ("service_id"),
+	FOREIGN KEY ("customer_id") REFERENCES "Customer"("customer_id"),	
+	FOREIGN KEY ("staff_id") REFERENCES "Stafff"("staff_id"),
+	FOREIGN KEY ("car_id") REFERENCES "Car"("car_id"),
+	FOREIGN KEY ("part_id") REFERENCES "Part"("part_id"),
+	FOREIGN KEY ("repair_id") REFERENCES "Shop"("repair_id")	
+);
+
+
+CREATE TABLE "Inventory" (
+  "inventory_id" SERIAL,
+  "car_id" INTEGER,
+  "location" VARCHAR,
+  "part_id" INTEGER,
+  PRIMARY KEY ("inventory_id"),
+	FOREIGN KEY ("car_id") REFERENCES "Car"("car_id"),
+	FOREIGN KEY ("part_id") REFERENCES "Part"("part_id")
+);
+
+
+CREATE TABLE "Sale" (
+	"sale_id" SERIAL,
+	"sale_date" TIMESTAMP,
+	"msrp" NUMERIC(10,2),
+	"customer_id" INTEGER,
+	"staff_id" INTEGER,
+	"car_id" INTEGER,
+	PRIMARY KEY ("sale_id"),
+	FOREIGN KEY ("customer_id") REFERENCES "Customer"("customer_id"),	
+	FOREIGN KEY ("staff_id") REFERENCES "Stafff"("staff_id"),
+	FOREIGN KEY ("car_id") REFERENCES "Car"("car_id")
+);
+
+
+CREATE TABLE "Invoice" (
+  "invoice_id" SERIAL,
+  "labor_cost" NUMERIC(7,2),
+  "total_parts" NUMERIC(7,2),
+  "total_cost" NUMERIC(7,2),
+  "service_id" INTEGER,
+  "sale_id" INTEGER,
+  "finance_id" INTEGER,
+  "invoice_paid" BOOLEAN,
+  "car_id" INTEGER,
+  "customer_id" INTEGER,
+ 
+  PRIMARY KEY ("invoice_id"),
+	FOREIGN KEY ("car_id") REFERENCES "Car"("car_id"),
+	FOREIGN KEY ("customer_id") REFERENCES "Customer"("customer_id"),
+	FOREIGN KEY ("service_id") REFERENCES "Service"("service_id"),
+	FOREIGN KEY ("finance_id") REFERENCES "Finance"("finance_id"),
+	FOREIGN KEY ("sale_id") REFERENCES "Sale"("sale_id")
+);
+
+
+
+
+CREATE TABLE "Finance" (
+  "finance_id" SERIAL,
+  "staff_id" INTEGER,
+  "customer_id" INTEGER,
+  "credit_score" INTEGER,
+  "loan_amount" INTEGER,
+  "bank_name" VARCHAR,
+  "routing_number" INTEGER,
+  PRIMARY KEY ("finance_id"),
+  	FOREIGN KEY ("customer_id") REFERENCES "Customer"("customer_id"),
+    FOREIGN KEY ("staff_id") REFERENCES "Stafff"("staff_id")
+      
+);
+
+
+
+
