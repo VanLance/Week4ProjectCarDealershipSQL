@@ -52,6 +52,30 @@ SELECT add_invoice(
 	2,
 	2
 );
+DROP FUNCTION loan_balance
+CREATE OR REPLACE Procedure loan_balance(
+	_finance_id INTEGER,
+	_recent_payment INTEGER
+)		
+
+AS $MAIN$
+BEGIN
+	UPDATE "Finance"
+	SET remaining_balance = loan_amount - _recent_payment
+	WHERE finance_id = _finance_id;
+	COMMIT;
+	
+END;
+$MAIN$
+LANGUAGE plpgsql;
+
+CALL loan_balance(1,100);
+CALL loan_balance(2,1500);
+
+SELECT *
+FROM "Finance";
 
 
-
+ALTER TABLE "Finance"
+ADD remaining_balance INTEGER;
+  
